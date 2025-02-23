@@ -1,8 +1,70 @@
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the user
+          example: 1
+        username:
+          type: string
+          description: The username of the user
+          example: "john_doe"
+        firstName:
+          type: string
+          description: The first name of the user
+          example: "John"
+        lastName:
+          type: string
+          description: The last name of the user
+          example: "Doe"
+        ssn:
+          type: string
+          description: The social security number of the user
+          example: "123-45-6789"
+        dob:
+          type: string
+          format: date
+          description: The date of birth of the user
+          example: "1990-01-01"
+        hiredOn:
+          type: string
+          format: date
+          description: The date the user was hired
+          example: "2021-01-01"
+        terminatedOn:
+          type: string
+          format: date
+          description: The date the user was terminated
+          example: "2021-01-01"
+        email:
+          type: string
+          description: The email of the user
+          example: "user@example.com"
+        department:
+          type: string
+          description: The department of the user
+          example: "Sales"
+        gender:
+          type: string
+          description: The gender of the user
+          example: "Male"
+        portrait:
+          type: string
+          description: The portrait of the user
+          example: "https://example.com/portrait.jpg"
+        thumbnail:
+          type: string
+          description: The thumbnail of the user
+          example: "https://example.com/thumbnail.jpg"
+
 paths:
   /api/users:
     get:
       summary: Get all users
       description: Get all users from the database
+      tags: [Users]
       responses:
         200:
           description: A list of users
@@ -18,44 +80,15 @@ paths:
                   data:
                     type: array
                     items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        username:
-                          type: string
-                        password:
-                          type: string
-                        firstName:
-                          type: string
-                        lastName:
-                          type: string
-                        ssn:
-                          type: string
-                        dob:
-                          type: string
-                          format: date
-                        hiredOn:
-                          type: string
-                          format: date
-                        terminatedOn:
-                          type: string
-                          format: date
-                        email:
-                          type: string
-                        department:
-                          type: string
-                        gender:
-                          type: string
-                        portrait:
-                          type: string
-                        thumbnail:
-                          type: string
+                      $ref: '#/components/schemas/User'
+        404:
+          description: Users not found
 
   /api/users/{id}:
     get:
       summary: Get a user by ID
       description: Get a user by ID from the database
+      tags: [Users]
       parameters:
         - name: id
           in: path
@@ -77,39 +110,39 @@ paths:
                   data:
                     type: array
                     items:
-                      type: object
-                      properties:
-                        id:
-                          type: number
-                        username:
-                          type: string
-                        password:
-                          type: string
-                        firstName:
-                          type: string
-                        lastName:
-                          type: string
-                        ssn:
-                          type: string
-                        dob:
-                          type: string
-                          format: date
-                        hiredOn:
-                          type: string
-                          format: date
-                        terminatedOn:
-                          type: string
-                          format: date
-                        email:
-                          type: string
-                        department:
-                          type: string
-                        gender:
-                          type: string
-                        portrait:
-                          type: string
-                        thumbnail:
-                          type: string
+                      $ref: '#/components/schemas/User'
         404:
           description: User not found
+
+    put:
+      summary: Update a user
+      description: Update a user in the database
       tags: [Users]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+          description: The ID of the user to update
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        200:
+          description: A user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/User'
+        404:
+          description: User not found

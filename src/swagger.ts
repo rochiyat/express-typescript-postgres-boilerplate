@@ -7,9 +7,10 @@ const options: swaggerJSDoc.Options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'API Documentation',
+      title: 'API Documentation for CURD With Express and PostgreSQL',
       version: '1.0.0',
-      description: 'Dokumentasi API menggunakan Swagger',
+      description:
+        "This is a API Documentation for CURD With Express and PostgreSQL based on the OpenAPI 3.0 specification.  You can find out more about Swagger at [https://swagger.io](https://swagger.io). In the third iteration of the CRUD API, we've switched to the design first approach!",
     },
     servers: [
       {
