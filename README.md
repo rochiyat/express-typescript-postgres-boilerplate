@@ -16,3 +16,7 @@ This repository provides a boilerplate for building a full-stack web application
 4. Start the development server with `npm run dev` or `yarn dev`.
 
 This boilerplate serves as a foundation for your Next.js projects that require a robust backend API and a scalable database solution.
+
+
+
+https://github.com/rochiyat/postgres-mock-seeder/tree/master/static-mock-data-seeder
