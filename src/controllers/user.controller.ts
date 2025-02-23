@@ -14,7 +14,11 @@ export async function getUsers(req: Request, res: Response) {
 export async function getUser(req: Request, res: Response) {
   try {
     const user = await userQuery.getUserById(Number(req.params.id));
-    returnSuccess(req, res, 200, 'Success', user);
+    if (!user) {
+      returnNonSuccess(req, res, 404, 'User not found');
+    } else {
+      returnSuccess(req, res, 200, 'Success', user);
+    }
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
   }
@@ -32,7 +36,11 @@ export async function createUser(req: Request, res: Response) {
 export async function updateUser(req: Request, res: Response) {
   try {
     const user = await userQuery.updateUser(Number(req.params.id), req.body);
-    returnSuccess(req, res, 200, 'Success', user);
+    if (!user) {
+      returnNonSuccess(req, res, 404, 'User not found');
+    } else {
+      returnSuccess(req, res, 200, 'Success', user);
+    }
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
   }
@@ -41,7 +49,11 @@ export async function updateUser(req: Request, res: Response) {
 export async function deleteUser(req: Request, res: Response) {
   try {
     const user = await userQuery.deleteUser(Number(req.params.id));
-    returnSuccess(req, res, 200, 'Success', user);
+    if (!user) {
+      returnNonSuccess(req, res, 404, 'User not found');
+    } else {
+      returnSuccess(req, res, 200, 'Success', user);
+    }
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
   }

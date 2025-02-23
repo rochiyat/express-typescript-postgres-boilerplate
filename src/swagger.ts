@@ -11,6 +11,34 @@ const options: swaggerJSDoc.Options = {
       version: '1.0.0',
       description:
         "This is a API Documentation for CURD With Express and PostgreSQL based on the OpenAPI 3.0 specification.  You can find out more about Swagger at [https://swagger.io](https://swagger.io). In the third iteration of the CRUD API, we've switched to the design first approach!",
+      contact: {
+        name: 'Rochiyat',
+        url: 'https://github.com/rochiyat',
+        email: 'rochiyat@gmail.com',
+      },
+      externalDocs: {
+        description: 'Find out more about Swagger',
+        url: 'https://swagger.io',
+      },
+      license: {
+        name: 'MIT',
+        url: 'https://opensource.org/licenses/MIT',
+      },
+      termsOfService: 'https://swagger.io/terms/',
+      tags: [
+        {
+          name: 'Users',
+          description: 'User related endpoints',
+        },
+        {
+          name: 'Projects',
+          description: 'Project related endpoints',
+        },
+        {
+          name: 'Roles',
+          description: 'Role related endpoints',
+        },
+      ],
     },
     servers: [
       {

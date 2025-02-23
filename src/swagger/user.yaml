@@ -146,3 +146,39 @@ paths:
                     $ref: '#/components/schemas/User'
         404:
           description: User not found
+
+    delete:
+      summary: Delete a user
+      description: Delete a user from the database
+      tags: [Users]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+          description: The ID of the user to delete
+      responses:
+        200:
+          description: A user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    $ref: '#/components/schemas/User'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
