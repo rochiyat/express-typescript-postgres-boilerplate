@@ -13,10 +13,6 @@ export interface User {
   gender: string;
   portrait: string;
   thumbnail: string;
-  addresses: UserAddress[];
-  phones: UserPhone[];
-  roles: UserRole[];
-  projects: ProjectAssignment[];
 }
 
 export interface UserAddress {

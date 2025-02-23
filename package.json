@@ -9,7 +9,8 @@
     "dev": "ts-node src/index.ts",
     "build": "tsc",
     "lint": "eslint src --ext .ts",
-    "format": "prettier --write src"
+    "format": "prettier --write src",
+    "seed": "ts-node prisma/employee-mock.ts && ts-node prisma/projects-mock.ts"
   },
   "keywords": [],
   "author": {

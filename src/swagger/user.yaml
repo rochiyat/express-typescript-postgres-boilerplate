@@ -1,0 +1,36 @@
+paths:
+  /users:
+    get:
+      summary: Get all users
+      description: Get all users from the database
+      responses:
+        200:
+          description: A list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+      tags: [Users]
+
+  /users/{id}:
+    get:
+      summary: Get a user by ID
+      description: Get a user by ID from the database
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: number
+          description: The ID of the user to get
+      responses:
+        200:
+          description: A user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        404:
+          description: User not found
+      tags: [Users]
