@@ -1,5 +1,5 @@
 paths:
-  /users:
+  /api/users:
     get:
       summary: Get all users
       description: Get all users from the database
@@ -9,12 +9,50 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'
-      tags: [Users]
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        username:
+                          type: string
+                        password:
+                          type: string
+                        firstName:
+                          type: string
+                        lastName:
+                          type: string
+                        ssn:
+                          type: string
+                        dob:
+                          type: string
+                          format: date
+                        hiredOn:
+                          type: string
+                          format: date
+                        terminatedOn:
+                          type: string
+                          format: date
+                        email:
+                          type: string
+                        department:
+                          type: string
+                        gender:
+                          type: string
+                        portrait:
+                          type: string
+                        thumbnail:
+                          type: string
 
-  /users/{id}:
+  /api/users/{id}:
     get:
       summary: Get a user by ID
       description: Get a user by ID from the database
@@ -30,7 +68,48 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/User'
+                type: object
+                properties:
+                  status:
+                    type: string
+                  message:
+                    type: string
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        username:
+                          type: string
+                        password:
+                          type: string
+                        firstName:
+                          type: string
+                        lastName:
+                          type: string
+                        ssn:
+                          type: string
+                        dob:
+                          type: string
+                          format: date
+                        hiredOn:
+                          type: string
+                          format: date
+                        terminatedOn:
+                          type: string
+                          format: date
+                        email:
+                          type: string
+                        department:
+                          type: string
+                        gender:
+                          type: string
+                        portrait:
+                          type: string
+                        thumbnail:
+                          type: string
         404:
           description: User not found
       tags: [Users]
