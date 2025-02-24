@@ -91,7 +91,6 @@ export async function getUserProjects(req: Request, res: Response) {
       returnSuccess(req, res, 200, 'Success', projectsWithDetails);
     }
   } catch (error) {
-    console.log('error', error);
     returnNonSuccess(req, res, 500, 'Internal Server Error');
   }
 }

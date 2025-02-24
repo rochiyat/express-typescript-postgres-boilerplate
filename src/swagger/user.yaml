@@ -87,7 +87,40 @@ components:
           type: string
           description: The description of the project
           example: "This project is a global initiative to improve the efficiency of the company's mobile operations."
-
+    Role:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the role
+          example: 1
+        userId:
+          type: integer
+          description: The ID of the user
+          example: 1
+        role:
+          type: string
+          description: The role of the user
+          example: employee
+    Phone:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the phone
+          example: 1
+        userId:
+          type: integer
+          description: The ID of the user
+          example: 1
+        type:
+          type: string
+          description: The type of the phone
+          example: "Mobile"
+        number:
+          type: string
+          description: The phone number of the user
+          example: "123-456-7890"
 paths:
   /api/users:
     get:
@@ -316,7 +349,55 @@ paths:
           type: number
           description: The ID of the user to get roles for
       responses:
-        # TODO: Add responses
+        200:
+          description: A list of roles
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "OK"
+                  message:
+                    type: string
+                    example: "Success"
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Role'
+        404:
+          description: User has no roles
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "ERROR"
+                  message:
+                    type: string
+                    example: "User has no roles"
+                  data:
+                    type: string
+                    example: "null"
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "ERROR"
+                  message:
+                    type: string
+                    example: "Internal Server Error"
+                  data:
+                    type: string
+                    example: "null"
 
   /api/users/{id}/phones:
     get:
@@ -330,4 +411,52 @@ paths:
           type: number
           description: The ID of the user to get phones for
       responses:
-        # TODO: Add responses
+        200:
+          description: A list of phones
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "OK"
+                  message:
+                    type: string
+                    example: "Success"
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Phone'
+        404:
+          description: User has no phones
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "ERROR"
+                  message:
+                    type: string
+                    example: "User has no phones"
+                  data:
+                    type: string
+                    example: "null"
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "ERROR"
+                  message:
+                    type: string
+                    example: "Internal Server Error"
+                  data:
+                    type: string
+                    example: "null"
