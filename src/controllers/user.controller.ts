@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { userQuery } from '../queries/user.query';
 import { returnSuccess, returnNonSuccess } from '../utils/helper.util';
+import { projectQuery } from '../queries/project.query';
 
 export async function getUsers(req: Request, res: Response) {
   try {
@@ -35,11 +36,18 @@ export async function createUser(req: Request, res: Response) {
 
 export async function updateUser(req: Request, res: Response) {
   try {
-    const user = await userQuery.updateUser(Number(req.params.id), req.body);
+    // get user by id
+    const user = await userQuery.getUserById(Number(req.params.id));
+
     if (!user) {
       returnNonSuccess(req, res, 404, 'User not found');
     } else {
-      returnSuccess(req, res, 200, 'Success', user);
+      // update user
+      const updatedUser = await userQuery.updateUser(
+        Number(req.params.id),
+        req.body
+      );
+      returnSuccess(req, res, 200, 'Success', updatedUser);
     }
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
@@ -48,11 +56,15 @@ export async function updateUser(req: Request, res: Response) {
 
 export async function deleteUser(req: Request, res: Response) {
   try {
-    const user = await userQuery.deleteUser(Number(req.params.id));
+    // get user by id
+    const user = await userQuery.getUserById(Number(req.params.id));
+
     if (!user) {
       returnNonSuccess(req, res, 404, 'User not found');
     } else {
-      returnSuccess(req, res, 200, 'Success', user);
+      // delete user
+      const deletedUser = await userQuery.deleteUser(Number(req.params.id));
+      returnSuccess(req, res, 200, 'Success', deletedUser);
     }
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
@@ -60,10 +72,26 @@ export async function deleteUser(req: Request, res: Response) {
 }
 
 export async function getUserProjects(req: Request, res: Response) {
+  let projectIds: number[] = [];
   try {
     const projects = await userQuery.getUserProjects(Number(req.params.id));
-    returnSuccess(req, res, 200, 'Success', projects);
+    if (projects.length === 0) {
+      returnNonSuccess(req, res, 404, 'User has no projects');
+    } else {
+      projectIds = projects.map((project: { projectId: number }) =>
+        Number(project.projectId)
+      );
+      const projectsWithDetails = await projectQuery.getProjects({
+        where: {
+          id: {
+            in: projectIds,
+          },
+        },
+      });
+      returnSuccess(req, res, 200, 'Success', projectsWithDetails);
+    }
   } catch (error) {
+    console.log('error', error);
     returnNonSuccess(req, res, 500, 'Internal Server Error');
   }
 }

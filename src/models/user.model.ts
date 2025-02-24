@@ -39,21 +39,3 @@ export interface UserRole {
   userId: number;
   role: string;
 }
-
-export interface ProjectAssignment {
-  id: number;
-  project: Project;
-  projectId: number;
-  user: User;
-  userId: number;
-}
-
-export interface Project {
-  id: number;
-  name: string;
-  department: string;
-  startedOn: Date;
-  endedOn: Date;
-  description: string;
-  assignments: ProjectAssignment[];
-}
