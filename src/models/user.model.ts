@@ -7,7 +7,7 @@ export interface User {
   ssn: string;
   dob: Date;
   hiredOn: Date;
-  terminatedOn: Date;
+  terminatedOn: Date | null;
   email: string;
   department: string;
   gender: string;

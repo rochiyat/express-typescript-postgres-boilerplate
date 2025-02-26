@@ -12,7 +12,7 @@ export interface Project {
   id: number;
   name: string;
   department: string;
-  startedOn: Date;
-  endedOn: Date;
-  description: string;
+  startedOn: string | Date;
+  endedOn: string | Date;
+  description: string | null;
 }

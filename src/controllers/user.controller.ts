@@ -6,7 +6,7 @@ import { projectQuery } from '../queries/project.query';
 export async function getUsers(req: Request, res: Response) {
   try {
     const users = await userQuery.getUsers();
-    returnSuccess(req, res, 200, 'Success', users);
+    returnSuccess(req, res, 200, 'Success to get users', users);
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
   }
@@ -18,7 +18,7 @@ export async function getUser(req: Request, res: Response) {
     if (!user) {
       returnNonSuccess(req, res, 404, 'User not found');
     } else {
-      returnSuccess(req, res, 200, 'Success', user);
+      returnSuccess(req, res, 200, 'Success to get user', user);
     }
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
@@ -28,7 +28,7 @@ export async function getUser(req: Request, res: Response) {
 export async function createUser(req: Request, res: Response) {
   try {
     const user = await userQuery.createUser(req.body);
-    returnSuccess(req, res, 200, 'Success', user);
+    returnSuccess(req, res, 200, 'Success to create user', user);
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
   }
@@ -47,7 +47,7 @@ export async function updateUser(req: Request, res: Response) {
         Number(req.params.id),
         req.body
       );
-      returnSuccess(req, res, 200, 'Success', updatedUser);
+      returnSuccess(req, res, 200, 'Success to update user', updatedUser);
     }
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
@@ -64,7 +64,7 @@ export async function deleteUser(req: Request, res: Response) {
     } else {
       // delete user
       const deletedUser = await userQuery.deleteUser(Number(req.params.id));
-      returnSuccess(req, res, 200, 'Success', deletedUser);
+      returnSuccess(req, res, 200, 'Success to delete user', deletedUser);
     }
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
@@ -88,7 +88,13 @@ export async function getUserProjects(req: Request, res: Response) {
           },
         },
       });
-      returnSuccess(req, res, 200, 'Success', projectsWithDetails);
+      returnSuccess(
+        req,
+        res,
+        200,
+        'Success to get user projects',
+        projectsWithDetails
+      );
     }
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
@@ -98,7 +104,7 @@ export async function getUserProjects(req: Request, res: Response) {
 export async function getUserRoles(req: Request, res: Response) {
   try {
     const roles = await userQuery.getUserRoles(Number(req.params.id));
-    returnSuccess(req, res, 200, 'Success', roles);
+    returnSuccess(req, res, 200, 'Success to get user roles', roles);
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
   }
@@ -107,7 +113,7 @@ export async function getUserRoles(req: Request, res: Response) {
 export async function getUserPhones(req: Request, res: Response) {
   try {
     const phones = await userQuery.getUserPhones(Number(req.params.id));
-    returnSuccess(req, res, 200, 'Success', phones);
+    returnSuccess(req, res, 200, 'Success to get user phones', phones);
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
   }
@@ -116,7 +122,7 @@ export async function getUserPhones(req: Request, res: Response) {
 export async function getUserAddresses(req: Request, res: Response) {
   try {
     const addresses = await userQuery.getUserAddresses(Number(req.params.id));
-    returnSuccess(req, res, 200, 'Success', addresses);
+    returnSuccess(req, res, 200, 'Success to get user addresses', addresses);
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
   }

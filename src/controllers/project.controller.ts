@@ -4,7 +4,7 @@ import { returnSuccess, returnNonSuccess } from '../utils/helper.util';
 
 export async function getProjects(req: Request, res: Response) {
   try {
-    const projects = await projectQuery.getProjects(req.query);
+    const projects = await projectQuery.getProjects({});
     returnSuccess(req, res, 200, 'Success', projects);
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
@@ -14,7 +14,11 @@ export async function getProjects(req: Request, res: Response) {
 export async function getProjectById(req: Request, res: Response) {
   try {
     const project = await projectQuery.getProjectById(Number(req.params.id));
-    returnSuccess(req, res, 200, 'Success', project);
+    if (!project) {
+      returnNonSuccess(req, res, 404, 'Project not found');
+    } else {
+      returnSuccess(req, res, 200, 'Success', project);
+    }
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
   }
@@ -31,11 +35,22 @@ export async function createProject(req: Request, res: Response) {
 
 export async function updateProject(req: Request, res: Response) {
   try {
-    const project = await projectQuery.updateProject(
-      Number(req.params.id),
-      req.body
-    );
-    returnSuccess(req, res, 200, 'Project updated successfully', project);
+    const project = await projectQuery.getProjectById(Number(req.params.id));
+    if (!project) {
+      returnNonSuccess(req, res, 404, 'Project not found');
+    } else {
+      const updatedProject = await projectQuery.updateProject(
+        Number(req.params.id),
+        req.body
+      );
+      returnSuccess(
+        req,
+        res,
+        200,
+        'Project updated successfully',
+        updatedProject
+      );
+    }
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
   }
@@ -43,8 +58,13 @@ export async function updateProject(req: Request, res: Response) {
 
 export async function deleteProject(req: Request, res: Response) {
   try {
-    await projectQuery.deleteProject(Number(req.params.id));
-    returnSuccess(req, res, 200, 'Project deleted successfully', null);
+    const project = await projectQuery.getProjectById(Number(req.params.id));
+    if (!project) {
+      returnNonSuccess(req, res, 404, 'Project not found');
+    } else {
+      await projectQuery.deleteProject(Number(req.params.id));
+      returnSuccess(req, res, 200, 'Project deleted successfully', null);
+    }
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
   }
@@ -55,7 +75,11 @@ export async function getProjectAssignments(req: Request, res: Response) {
     const assignments = await projectQuery.getProjectAssignments(
       Number(req.params.id)
     );
-    returnSuccess(req, res, 200, 'Success', assignments);
+    if (assignments.length === 0) {
+      returnNonSuccess(req, res, 404, 'Project has no assignments');
+    } else {
+      returnSuccess(req, res, 200, 'Success', assignments);
+    }
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
   }
@@ -64,7 +88,11 @@ export async function getProjectAssignments(req: Request, res: Response) {
 export async function getProjectUsers(req: Request, res: Response) {
   try {
     const users = await projectQuery.getProjectUsers(Number(req.params.id));
-    returnSuccess(req, res, 200, 'Success', users);
+    if (users.length === 0) {
+      returnNonSuccess(req, res, 404, 'Project has no users');
+    } else {
+      returnSuccess(req, res, 200, 'Success', users);
+    }
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
   }
