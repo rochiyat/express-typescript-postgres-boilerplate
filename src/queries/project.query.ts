@@ -1,4 +1,4 @@
-import moment from 'moment';
+import { isEmpty } from 'lodash';
 import prisma from '../../prisma/client';
 import { Project } from '../models/project.model';
 
@@ -14,7 +14,7 @@ export class ProjectQuery {
 
   async getProjectById(id: number) {
     const project = await prisma.project.findUnique({ where: { id } });
-    if (!project) {
+    if (!isEmpty(project)) {
       throw new Error('Project not found');
     } else {
       return project;
@@ -59,8 +59,9 @@ export class ProjectQuery {
       const users = await prisma.user.findMany({
         where: {
           id: {
-            in: assignments.map((assignment: { id: number; projectId: number; userId: number }) => 
-              Number(assignment.userId)
+            in: assignments.map(
+              (assignment: { id: number; projectId: number; userId: number }) =>
+                Number(assignment.userId)
             ),
           },
         },

@@ -1,16 +1,15 @@
-# Boilerplate for Next.js, Express, and PostgreSQL Integration
+# Boilerplate for Express and PostgreSQL Integration with TypeScript and Prisma
 
-This repository provides a boilerplate for building a full-stack web application using Next.js for the frontend, Express.js for the backend API, and PostgreSQL as the database. It is designed to streamline the development process by offering a pre-configured setup that integrates these technologies seamlessly.
+This repository provides a boilerplate for building a backend API using express and CRUD operations with PostgreSQL as the database. It is designed to streamline the development process by offering a pre-configured setup that integrates these technologies seamlessly.
 
 ## Features
 
 - **TypeScript Support**: Leverage TypeScript's static typing for enhanced code quality and developer experience.
 - **Express Setup**: Pre-configured with Express for rapid API development.
 - **Environment Configuration**: Easily manage environment variables using [dotenv](https://github.com/motdotla/dotenv).
-- **ESLint & Prettier**: Pre-configured for consistent code style and linting.
+- **ESLint**: Pre-configured for consistent code style and linting.
 - **Jest**: Ready-to-go setup for unit and integration testing.
 - **Swagger UI**: Auto-generated API documentation using [Swagger](https://swagger.io/).
-- **Error Handling**: Centralized error handling middleware.
 - **PostgreSQL**: Pre-configured with PostgreSQL for database integration.
 - **Prisma**: Pre-configured with Prisma for database integration.
 
@@ -18,7 +17,7 @@ This repository provides a boilerplate for building a full-stack web application
 
 ### Prerequisites
 
-- **Node.js** (>= 14.x recommended)
+- **Node.js** (>= 18.x recommended)
 - **Yarn** or **npm**
 
 ### Installation
@@ -34,6 +33,22 @@ cd express-typescript-postgres-boilerplate
 yarn install
 # or
 npm install
+```
+
+### Seeding the Database
+
+Seeding with the `seed` script will populate the database with sample data library *static-mock-data-seeder*.
+Can you see in repo https://github.com/rochiyat/postgres-mock-seeder
+Make sure to install it before running the seed script & application connect to the database.
+```bash
+# Create the tables
+npx prisma init
+npx prisma migrate dev --name init
+
+# Run the seed script
+yarn seed
+# or
+npm run seed
 ```
 
 ### Running the Application
@@ -57,12 +72,14 @@ npm run build
 
 This will compile the TypeScript code into JavaScript under the `dist` directory.
 
-### Running Tests
+### Running Tests & Coverage
 
 ```bash
 yarn test
+yarn test:coverage
 # or
 npm test
+npm test:coverage
 ```
 
 ## Project Structure
@@ -70,13 +87,16 @@ npm test
 ```
 src/
 │
+├── configs/           # Configuration files
 ├── controllers/       # Route controllers (Controllers layer)
 ├── models/            # Data models (e.g., Mongoose schemas)
 ├── routes/            # Express routes
 ├── services/          # Business logic (Service layer)
 ├── utils/             # Utility functions and helpers
 │
-└── index.ts           # Entry point
+└── index.ts           # Entry point of the application
+prisma/                # Prisma client
+tests/                 # Unit and integration tests
 ```
 
 ## Configuration
@@ -86,6 +106,13 @@ Environment variables are managed using a `.env` file. Here's an example:
 ```
 PORT=3000
 NODE_ENV=development
+
+DEV_DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public"
+PROD_DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public"
+
+DATABASE_URL=${DEV_DATABASE_URL}
+
+
 ```
 
 ## API Documentation
@@ -107,7 +134,3 @@ This project is licensed under the MIT License.
 ## Acknowledgements
 
 Special thanks to the open-source community for providing great libraries and tools!
-
-
-
-https://github.com/rochiyat/postgres-mock-seeder/tree/master/static-mock-data-seeder
