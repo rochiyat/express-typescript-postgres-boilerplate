@@ -78,7 +78,13 @@ export async function getProjectAssignments(req: Request, res: Response) {
     if (assignments.length === 0) {
       returnNonSuccess(req, res, 404, 'Project has no assignments');
     } else {
-      returnSuccess(req, res, 200, 'Success', assignments);
+      returnSuccess(
+        req,
+        res,
+        200,
+        'Success to get project assignments',
+        assignments
+      );
     }
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');
@@ -91,7 +97,7 @@ export async function getProjectUsers(req: Request, res: Response) {
     if (users.length === 0) {
       returnNonSuccess(req, res, 404, 'Project has no users');
     } else {
-      returnSuccess(req, res, 200, 'Success', users);
+      returnSuccess(req, res, 200, 'Success to get project users', users);
     }
   } catch (error) {
     returnNonSuccess(req, res, 500, 'Internal Server Error');

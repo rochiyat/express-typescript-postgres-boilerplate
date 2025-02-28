@@ -5,6 +5,7 @@ import {
   updateProject,
   deleteProject,
   getProjectUsers,
+  getProjectAssignments,
 } from '../../../src/controllers/project.controller';
 import { projectQuery } from '../../../src/queries/project.query';
 import {
@@ -20,6 +21,7 @@ jest.mock('../../../src/queries/project.query', () => ({
     updateProject: jest.fn(),
     deleteProject: jest.fn(),
     getProjectUsers: jest.fn(),
+    getProjectAssignments: jest.fn(),
   },
 }));
 
@@ -304,6 +306,137 @@ describe('Project Controller', () => {
       await deleteProject(req, res);
 
       expect(projectQuery.getProjectById).toHaveBeenCalledWith(req.params.id);
+      expect(returnNonSuccess).toHaveBeenCalledWith(
+        req,
+        res,
+        500,
+        'Internal Server Error'
+      );
+    });
+  });
+
+  describe('getProjectAssignments', () => {
+    let req: any;
+    let res: any;
+
+    beforeEach(() => {
+      req = { params: { id: 1 } };
+      res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+
+      jest.clearAllMocks();
+    });
+
+    it('should return user projects', async () => {
+      const mockProjects = [{ id: 1, name: 'Project 1' }];
+      (projectQuery.getProjectAssignments as jest.Mock).mockResolvedValue(
+        mockProjects
+      );
+
+      await getProjectAssignments(req, res);
+
+      expect(projectQuery.getProjectAssignments).toHaveBeenCalledWith(
+        req.params.id
+      );
+      expect(returnSuccess).toHaveBeenCalledWith(
+        req,
+        res,
+        200,
+        'Success to get project assignments',
+        mockProjects
+      );
+    });
+
+    it('should return 404 if project not found', async () => {
+      (projectQuery.getProjectAssignments as jest.Mock).mockResolvedValue([]);
+
+      await getProjectAssignments(req, res);
+
+      expect(projectQuery.getProjectAssignments).toHaveBeenCalledWith(
+        req.params.id
+      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(
+        req,
+        res,
+        404,
+        'Project has no assignments'
+      );
+    });
+
+    it('should handle errors and return 500 response', async () => {
+      const mockError = new Error('Database error');
+      (projectQuery.getProjectAssignments as jest.Mock).mockRejectedValue(
+        mockError
+      );
+      await getProjectAssignments(req, res);
+
+      expect(projectQuery.getProjectAssignments).toHaveBeenCalledWith(
+        req.params.id
+      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(
+        req,
+        res,
+        500,
+        'Internal Server Error'
+      );
+    });
+  });
+
+  describe('getProjectUsers', () => {
+    let req: any;
+    let res: any;
+
+    beforeEach(() => {
+      req = { params: { id: 1 } };
+      res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+
+      jest.clearAllMocks();
+    });
+
+    it('should return project users', async () => {
+      const mockProjects = [{ id: 1, name: 'Project 1' }];
+      (projectQuery.getProjectUsers as jest.Mock).mockResolvedValue(
+        mockProjects
+      );
+      (projectQuery.getProjects as jest.Mock).mockResolvedValue(mockProjects);
+
+      await getProjectUsers(req, res);
+
+      expect(projectQuery.getProjectUsers).toHaveBeenCalledWith(req.params.id);
+      expect(returnSuccess).toHaveBeenCalledWith(
+        req,
+        res,
+        200,
+        'Success to get project users',
+        mockProjects
+      );
+    });
+
+    it('should return 404 if project not found', async () => {
+      (projectQuery.getProjectUsers as jest.Mock).mockResolvedValue([]);
+
+      await getProjectUsers(req, res);
+
+      expect(projectQuery.getProjectUsers).toHaveBeenCalledWith(req.params.id);
+      expect(returnNonSuccess).toHaveBeenCalledWith(
+        req,
+        res,
+        404,
+        'Project has no users'
+      );
+    });
+
+    it('should handle errors and return 500 response', async () => {
+      const mockError = new Error('Database error');
+      (projectQuery.getProjectUsers as jest.Mock).mockRejectedValue(mockError);
+      await getProjectUsers(req, res);
+
+      expect(projectQuery.getProjectUsers).toHaveBeenCalledWith(req.params.id);
       expect(returnNonSuccess).toHaveBeenCalledWith(
         req,
         res,
