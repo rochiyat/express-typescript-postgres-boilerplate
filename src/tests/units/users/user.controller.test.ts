@@ -8,10 +8,10 @@ import {
   getUserRoles,
   getUserPhones,
   getUserAddresses,
-} from '../../../src/controllers/user.controller';
-import { projectQuery } from '../../../src/queries/project.query';
-import { userQuery } from '../../../src/queries/user.query';
-import { returnSuccess, returnNonSuccess } from '../../../src/utils/helper.util';
+} from '../../../controllers/user.controller';
+import { projectQuery } from '../../../queries/project.query';
+import { userQuery } from '../../../queries/user.query';
+import { returnSuccess, returnNonSuccess } from '../../../utils/helper.util';
 
 jest.mock('../../../src/queries/user.query', () => ({
   userQuery: {

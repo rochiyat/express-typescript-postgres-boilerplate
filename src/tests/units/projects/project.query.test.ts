@@ -1,5 +1,5 @@
-import { projectQuery } from '../../../src/queries/project.query';
-import prisma from '../../../prisma/client';
+import { projectQuery } from '../../../queries/project.query';
+import prisma from '../../../database/client';
 
 describe('Project Query', () => {
   describe('getProjects', () => {

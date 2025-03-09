@@ -6,9 +6,9 @@ import {
   deleteProject,
   getProjectUsers,
   getProjectAssignments,
-} from '../../../src/controllers/project.controller';
-import { projectQuery } from '../../../src/queries/project.query';
-import { returnSuccess, returnNonSuccess } from '../../../src/utils/helper.util';
+} from '../../../controllers/project.controller';
+import { projectQuery } from '../../../queries/project.query';
+import { returnSuccess, returnNonSuccess } from '../../../utils/helper.util';
 
 jest.mock('../../../src/queries/project.query', () => ({
   projectQuery: {

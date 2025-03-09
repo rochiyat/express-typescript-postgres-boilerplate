@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const projects = require('./seeder/projects.json');
 
 const prisma = new PrismaClient();
