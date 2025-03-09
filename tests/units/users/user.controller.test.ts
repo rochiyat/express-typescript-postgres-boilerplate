@@ -11,10 +11,7 @@ import {
 } from '../../../src/controllers/user.controller';
 import { projectQuery } from '../../../src/queries/project.query';
 import { userQuery } from '../../../src/queries/user.query';
-import {
-  returnSuccess,
-  returnNonSuccess,
-} from '../../../src/utils/helper.util';
+import { returnSuccess, returnNonSuccess } from '../../../src/utils/helper.util';
 
 jest.mock('../../../src/queries/user.query', () => ({
   userQuery: {
@@ -79,13 +76,7 @@ describe('User Controller', () => {
       await createUser(req, res);
 
       expect(userQuery.createUser).toHaveBeenCalledWith(req.body);
-      expect(returnSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        200,
-        'Success to create user',
-        mockUser
-      );
+      expect(returnSuccess).toHaveBeenCalledWith(req, res, 200, 'Success to create user', mockUser);
     });
 
     it('should handle errors and return 500 response', async () => {
@@ -95,12 +86,7 @@ describe('User Controller', () => {
       await createUser(req, res);
 
       expect(userQuery.createUser).toHaveBeenCalledWith(req.body);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        500,
-        'Internal Server Error'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 500, 'Internal Server Error');
     });
   });
 
@@ -128,13 +114,7 @@ describe('User Controller', () => {
       await getUsers(req, res);
 
       expect(userQuery.getUsers).toHaveBeenCalled();
-      expect(returnSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        200,
-        'Success to get users',
-        mockUsers
-      );
+      expect(returnSuccess).toHaveBeenCalledWith(req, res, 200, 'Success to get users', mockUsers);
     });
 
     it('should handle errors and return 500 response', async () => {
@@ -143,12 +123,7 @@ describe('User Controller', () => {
 
       await getUsers(req, res);
 
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        500,
-        'Internal Server Error'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 500, 'Internal Server Error');
     });
   });
 
@@ -173,13 +148,7 @@ describe('User Controller', () => {
       await getUser(req, res);
 
       expect(userQuery.getUserById).toHaveBeenCalledWith(req.params.id);
-      expect(returnSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        200,
-        'Success to get user',
-        mockUser
-      );
+      expect(returnSuccess).toHaveBeenCalledWith(req, res, 200, 'Success to get user', mockUser);
     });
 
     it('should return 404 if user not found', async () => {
@@ -188,12 +157,7 @@ describe('User Controller', () => {
       await getUser(req, res);
 
       expect(userQuery.getUserById).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        404,
-        'User not found'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 404, 'User not found');
     });
 
     it('should handle errors and return 500 response', async () => {
@@ -203,12 +167,7 @@ describe('User Controller', () => {
       await getUser(req, res);
 
       expect(userQuery.getUserById).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        500,
-        'Internal Server Error'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 500, 'Internal Server Error');
     });
   });
 
@@ -233,13 +192,7 @@ describe('User Controller', () => {
       await deleteUser(req, res);
 
       expect(userQuery.getUserById).toHaveBeenCalledWith(req.params.id);
-      expect(returnSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        200,
-        'Success to delete user',
-        mockUser
-      );
+      expect(returnSuccess).toHaveBeenCalledWith(req, res, 200, 'Success to delete user', mockUser);
     });
 
     it('should return 404 if user not found', async () => {
@@ -248,12 +201,7 @@ describe('User Controller', () => {
       await deleteUser(req, res);
 
       expect(userQuery.getUserById).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        404,
-        'User not found'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 404, 'User not found');
     });
 
     it('should handle errors and return 500 response', async () => {
@@ -263,12 +211,7 @@ describe('User Controller', () => {
       await deleteUser(req, res);
 
       expect(userQuery.getUserById).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        500,
-        'Internal Server Error'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 500, 'Internal Server Error');
     });
   });
 
@@ -293,13 +236,7 @@ describe('User Controller', () => {
       await updateUser(req, res);
 
       expect(userQuery.getUserById).toHaveBeenCalledWith(req.params.id);
-      expect(returnSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        200,
-        'Success to update user',
-        mockUser
-      );
+      expect(returnSuccess).toHaveBeenCalledWith(req, res, 200, 'Success to update user', mockUser);
     });
 
     it('should return 404 if user not found', async () => {
@@ -308,12 +245,7 @@ describe('User Controller', () => {
       await updateUser(req, res);
 
       expect(userQuery.getUserById).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        404,
-        'User not found'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 404, 'User not found');
     });
 
     it('should handle errors and return 500 response', async () => {
@@ -323,12 +255,7 @@ describe('User Controller', () => {
       await updateUser(req, res);
 
       expect(userQuery.getUserById).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        500,
-        'Internal Server Error'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 500, 'Internal Server Error');
     });
   });
 
@@ -369,12 +296,7 @@ describe('User Controller', () => {
       await getUserProjects(req, res);
 
       expect(userQuery.getUserProjects).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        404,
-        'User has no projects'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 404, 'User has no projects');
     });
 
     it('should handle errors and return 500 response', async () => {
@@ -383,12 +305,7 @@ describe('User Controller', () => {
       await getUserProjects(req, res);
 
       expect(userQuery.getUserProjects).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        500,
-        'Internal Server Error'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 500, 'Internal Server Error');
     });
   });
 
@@ -428,12 +345,7 @@ describe('User Controller', () => {
       await getUserRoles(req, res);
 
       expect(userQuery.getUserRoles).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        500,
-        'Internal Server Error'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 500, 'Internal Server Error');
     });
   });
 
@@ -473,12 +385,7 @@ describe('User Controller', () => {
       await getUserPhones(req, res);
 
       expect(userQuery.getUserPhones).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        500,
-        'Internal Server Error'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 500, 'Internal Server Error');
     });
   });
 
@@ -498,9 +405,7 @@ describe('User Controller', () => {
 
     it('should return user addresses', async () => {
       const mockAddresses = [{ id: 1, address: '123 Main St' }];
-      (userQuery.getUserAddresses as jest.Mock).mockResolvedValue(
-        mockAddresses
-      );
+      (userQuery.getUserAddresses as jest.Mock).mockResolvedValue(mockAddresses);
 
       await getUserAddresses(req, res);
 
@@ -520,12 +425,7 @@ describe('User Controller', () => {
       await getUserAddresses(req, res);
 
       expect(userQuery.getUserAddresses).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        500,
-        'Internal Server Error'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 500, 'Internal Server Error');
     });
   });
 });

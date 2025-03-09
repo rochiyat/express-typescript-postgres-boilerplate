@@ -10,54 +10,54 @@ components:
         username:
           type: string
           description: The username of the user
-          example: "john_doe"
+          example: 'john_doe'
         firstName:
           type: string
           description: The first name of the user
-          example: "John"
+          example: 'John'
         lastName:
           type: string
           description: The last name of the user
-          example: "Doe"
+          example: 'Doe'
         ssn:
           type: string
           description: The social security number of the user
-          example: "123-45-6789"
+          example: '123-45-6789'
         dob:
           type: string
           format: date
           description: The date of birth of the user
-          example: "1990-01-01"
+          example: '1990-01-01'
         hiredOn:
           type: string
           format: date
           description: The date the user was hired
-          example: "2021-01-01"
+          example: '2021-01-01'
         terminatedOn:
           type: string
           format: date
           description: The date the user was terminated
-          example: "2021-01-01"
+          example: '2021-01-01'
         email:
           type: string
           description: The email of the user
-          example: "user@example.com"
+          example: 'user@example.com'
         department:
           type: string
           description: The department of the user
-          example: "Sales"
+          example: 'Sales'
         gender:
           type: string
           description: The gender of the user
-          example: "Male"
+          example: 'Male'
         portrait:
           type: string
           description: The portrait of the user
-          example: "https://example.com/portrait.jpg"
+          example: 'https://example.com/portrait.jpg'
         thumbnail:
           type: string
           description: The thumbnail of the user
-          example: "https://example.com/thumbnail.jpg"
+          example: 'https://example.com/thumbnail.jpg'
     Project:
       type: object
       properties:
@@ -68,21 +68,21 @@ components:
         name:
           type: string
           description: The name of the project
-          example: "Win-Win Global Efficient Mobile Initiative"
+          example: 'Win-Win Global Efficient Mobile Initiative'
         department:
           type: string
           description: The department of the project
-          example: "Human Resources"
+          example: 'Human Resources'
         startedOn:
           type: string
           format: date
           description: The date the project started
-          example: "2021-01-01"
+          example: '2021-01-01'
         endedOn:
           type: string
           format: date
           description: The date the project ended
-          example: "2021-01-01"
+          example: '2021-01-01'
         description:
           type: string
           description: The description of the project
@@ -116,11 +116,11 @@ components:
         type:
           type: string
           description: The type of the phone
-          example: "Mobile"
+          example: 'Mobile'
         number:
           type: string
           description: The phone number of the user
-          example: "123-456-7890"
+          example: '123-456-7890'
 paths:
   /api/users:
     get:
@@ -296,10 +296,10 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "OK"
+                    example: 'OK'
                   message:
                     type: string
-                    example: "Success"
+                    example: 'Success'
                   data:
                     type: array
                     items:
@@ -313,13 +313,13 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "ERROR"
+                    example: 'ERROR'
                   message:
                     type: string
-                    example: "User has no projects"
+                    example: 'User has no projects'
                   data:
                     type: string
-                    example: "null"
+                    example: 'null'
         500:
           description: Internal Server Error
           content:
@@ -329,13 +329,13 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "ERROR"
+                    example: 'ERROR'
                   message:
                     type: string
-                    example: "Internal Server Error"
+                    example: 'Internal Server Error'
                   data:
                     type: string
-                    example: "null"
+                    example: 'null'
 
   /api/users/{id}/roles:
     get:
@@ -358,10 +358,10 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "OK"
+                    example: 'OK'
                   message:
                     type: string
-                    example: "Success"
+                    example: 'Success'
                   data:
                     type: array
                     items:
@@ -375,13 +375,13 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "ERROR"
+                    example: 'ERROR'
                   message:
                     type: string
-                    example: "User has no roles"
+                    example: 'User has no roles'
                   data:
                     type: string
-                    example: "null"
+                    example: 'null'
         500:
           description: Internal Server Error
           content:
@@ -391,13 +391,13 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "ERROR"
+                    example: 'ERROR'
                   message:
                     type: string
-                    example: "Internal Server Error"
+                    example: 'Internal Server Error'
                   data:
                     type: string
-                    example: "null"
+                    example: 'null'
 
   /api/users/{id}/phones:
     get:
@@ -420,10 +420,10 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "OK"
+                    example: 'OK'
                   message:
                     type: string
-                    example: "Success"
+                    example: 'Success'
                   data:
                     type: array
                     items:
@@ -437,13 +437,13 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "ERROR"
+                    example: 'ERROR'
                   message:
                     type: string
-                    example: "User has no phones"
+                    example: 'User has no phones'
                   data:
                     type: string
-                    example: "null"
+                    example: 'null'
         500:
           description: Internal Server Error
           content:
@@ -453,10 +453,10 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "ERROR"
+                    example: 'ERROR'
                   message:
                     type: string
-                    example: "Internal Server Error"
+                    example: 'Internal Server Error'
                   data:
                     type: string
-                    example: "null"
+                    example: 'null'

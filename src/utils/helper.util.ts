@@ -5,7 +5,7 @@ export function returnSuccess(
   res: Response,
   statusCode: number,
   message: string,
-  data: any
+  data: unknown
 ) {
   const returnResponse = {
     status: 'OK',
@@ -15,11 +15,6 @@ export function returnSuccess(
   return res.status(statusCode).json(returnResponse);
 }
 
-export function returnNonSuccess(
-  req: Request,
-  res: Response,
-  statusCode: number,
-  message: string
-) {
+export function returnNonSuccess(req: Request, res: Response, statusCode: number, message: string) {
   return res.status(statusCode).json({ status: 'ERROR', message });
 }

@@ -82,9 +82,7 @@ describe('userQuery', () => {
 
     it('should return null if user not found', async () => {
       try {
-        jest
-          .spyOn(prisma.user, 'delete')
-          .mockRejectedValue(new Error('User not found'));
+        jest.spyOn(prisma.user, 'delete').mockRejectedValue(new Error('User not found'));
         await userQuery.deleteUser(999);
       } catch (error) {
         expect(error).toBeDefined();

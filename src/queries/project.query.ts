@@ -59,9 +59,8 @@ export class ProjectQuery {
       const users = await prisma.user.findMany({
         where: {
           id: {
-            in: assignments.map(
-              (assignment: { id: number; projectId: number; userId: number }) =>
-                Number(assignment.userId)
+            in: assignments.map((assignment: { id: number; projectId: number; userId: number }) =>
+              Number(assignment.userId)
             ),
           },
         },

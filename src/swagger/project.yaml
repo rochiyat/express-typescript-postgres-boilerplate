@@ -10,21 +10,21 @@ components:
         name:
           type: string
           description: The name of the project
-          example: "Win-Win Global Efficient Mobile Initiative"
+          example: 'Win-Win Global Efficient Mobile Initiative'
         department:
           type: string
           description: The department of the project
-          example: "Human Resources"
+          example: 'Human Resources'
         startedOn:
           type: string
           format: date
           description: The date the project started
-          example: "2021-01-01"
+          example: '2021-01-01'
         endedOn:
           type: string
           format: date
           description: The date the project ended
-          example: "2021-01-01"
+          example: '2021-01-01'
         description:
           type: string
           description: The description of the project
@@ -61,10 +61,10 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "SUCCESS"
+                    example: 'SUCCESS'
                   message:
                     type: string
-                    example: "Projects fetched successfully"
+                    example: 'Projects fetched successfully'
                   data:
                     type: array
                     items:
@@ -78,13 +78,13 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "ERROR"
+                    example: 'ERROR'
                   message:
                     type: string
-                    example: "No projects found"
+                    example: 'No projects found'
                   data:
                     type: string
-                    example: "null"
+                    example: 'null'
         500:
           description: Internal Server Error
           content:
@@ -94,68 +94,68 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "ERROR"
+                    example: 'ERROR'
                   message:
                     type: string
-                    example: "Internal Server Error"
+                    example: 'Internal Server Error'
                   data:
                     type: string
-                    example: "null"
+                    example: 'null'
 
     post:
       summary: Create a project
       description: Create a project in the database
       tags: [Projects]
       responses:
-          200:
-            description: Create a project
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    status:
-                      type: string
-                      example: "SUCCESS"
-                    message:
-                      type: string
-                      example: "Project created successfully"
-                    data:
-                      type: object
-                      properties:
-                        $ref: '#/components/schemas/Project'
-          400:
-            description: Bad Request
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    status:
-                      type: string
-                      example: "ERROR"
-                    message:
-                      type: string
-                      example: "Bad Request"
-                    data:
-                      type: string
-                      example: "null"
-          500:
-            description: Internal Server Error
-            content:
-              application/json:
-                schema:
-                  type: object
-                  properties:
-                    status:
-                      type: string
-                      example: "ERROR"
-                    message:
-                      type: string
-                      example: "Internal Server Error"
-                    data:
-                      type: string
-                      example: "null"
+        200:
+          description: Create a project
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: 'SUCCESS'
+                  message:
+                    type: string
+                    example: 'Project created successfully'
+                  data:
+                    type: object
+                    properties:
+                      $ref: '#/components/schemas/Project'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: 'ERROR'
+                  message:
+                    type: string
+                    example: 'Bad Request'
+                  data:
+                    type: string
+                    example: 'null'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: 'ERROR'
+                  message:
+                    type: string
+                    example: 'Internal Server Error'
+                  data:
+                    type: string
+                    example: 'null'
 
   /api/projects/{id}:
     get:
@@ -172,10 +172,10 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "SUCCESS"
+                    example: 'SUCCESS'
                   message:
                     type: string
-                    example: "Project fetched successfully"
+                    example: 'Project fetched successfully'
         404:
           description: Project not found
           content:
@@ -185,10 +185,10 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "ERROR"
+                    example: 'ERROR'
                   message:
                     type: string
-                    example: "Project not found"
+                    example: 'Project not found'
         500:
           description: Internal Server Error
           content:
@@ -198,10 +198,10 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "ERROR"
+                    example: 'ERROR'
                   message:
                     type: string
-                    example: "Internal Server Error"
+                    example: 'Internal Server Error'
 
     put:
       summary: Update a project by ID
@@ -217,10 +217,10 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "SUCCESS"
+                    example: 'SUCCESS'
                   message:
                     type: string
-                    example: "Project updated successfully"
+                    example: 'Project updated successfully'
                   data:
                     type: object
                     properties:
@@ -234,13 +234,13 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "ERROR"
+                    example: 'ERROR'
                   message:
                     type: string
-                    example: "Project not found"
+                    example: 'Project not found'
                   data:
                     type: string
-                    example: "null"
+                    example: 'null'
         500:
           description: Internal Server Error
           content:
@@ -250,13 +250,13 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "ERROR"
+                    example: 'ERROR'
                   message:
                     type: string
-                    example: "Internal Server Error"
+                    example: 'Internal Server Error'
                   data:
                     type: string
-                    example: "null"
+                    example: 'null'
 
     delete:
       summary: Delete a project by ID
@@ -272,13 +272,13 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "SUCCESS"
+                    example: 'SUCCESS'
                   message:
                     type: string
-                    example: "Project deleted successfully"
+                    example: 'Project deleted successfully'
                   data:
                     type: string
-                    example: "null"
+                    example: 'null'
         404:
           description: Project not found
           content:
@@ -288,13 +288,13 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "ERROR"
+                    example: 'ERROR'
                   message:
                     type: string
-                    example: "Project not found"
+                    example: 'Project not found'
                   data:
                     type: string
-                    example: "null"
+                    example: 'null'
         500:
           description: Internal Server Error
           content:
@@ -304,13 +304,13 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "ERROR"
+                    example: 'ERROR'
                   message:
                     type: string
-                    example: "Internal Server Error"
+                    example: 'Internal Server Error'
                   data:
                     type: string
-                    example: "null"
+                    example: 'null'
 
   /api/projects/{id}/assignments:
     get:
@@ -327,10 +327,10 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "SUCCESS"
+                    example: 'SUCCESS'
                   message:
                     type: string
-                    example: "Assignments fetched successfully"
+                    example: 'Assignments fetched successfully'
                   data:
                     type: array
                     items:
@@ -344,13 +344,13 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "ERROR"
+                    example: 'ERROR'
                   message:
                     type: string
-                    example: "Project not found"
+                    example: 'Project not found'
                   data:
                     type: string
-                    example: "null"
+                    example: 'null'
 
   /api/projects/{id}/users:
     get:
@@ -367,10 +367,10 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "SUCCESS"
+                    example: 'SUCCESS'
                   message:
                     type: string
-                    example: "Users fetched successfully"
+                    example: 'Users fetched successfully'
                   data:
                     type: array
                     items:
@@ -384,13 +384,13 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "ERROR"
+                    example: 'ERROR'
                   message:
                     type: string
-                    example: "Project not found"
+                    example: 'Project not found'
                   data:
                     type: string
-                    example: "null"
+                    example: 'null'
         500:
           description: Internal Server Error
           content:
@@ -400,10 +400,10 @@ paths:
                 properties:
                   status:
                     type: string
-                    example: "ERROR"
+                    example: 'ERROR'
                   message:
                     type: string
-                    example: "Internal Server Error"
+                    example: 'Internal Server Error'
                   data:
                     type: string
-                    example: "null"
+                    example: 'null'
