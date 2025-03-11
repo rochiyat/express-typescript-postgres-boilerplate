@@ -10,7 +10,7 @@ import {
 import { projectQuery } from '../../../queries/project.query';
 import { returnSuccess, returnNonSuccess } from '../../../utils/helper.util';
 
-jest.mock('../../../src/queries/project.query', () => ({
+jest.mock('../../../queries/project.query', () => ({
   projectQuery: {
     getProjects: jest.fn(),
     getProjectById: jest.fn(),
@@ -22,7 +22,7 @@ jest.mock('../../../src/queries/project.query', () => ({
   },
 }));
 
-jest.mock('../../../src/utils/helper.util', () => ({
+jest.mock('../../../utils/helper.util', () => ({
   returnSuccess: jest.fn(),
   returnNonSuccess: jest.fn(),
 }));

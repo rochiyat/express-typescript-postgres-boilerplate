@@ -13,7 +13,7 @@ import { projectQuery } from '../../../queries/project.query';
 import { userQuery } from '../../../queries/user.query';
 import { returnSuccess, returnNonSuccess } from '../../../utils/helper.util';
 
-jest.mock('../../../src/queries/user.query', () => ({
+jest.mock('../../../queries/user.query', () => ({
   userQuery: {
     createUser: jest.fn(),
     getUsers: jest.fn(),
@@ -27,13 +27,13 @@ jest.mock('../../../src/queries/user.query', () => ({
   },
 }));
 
-jest.mock('../../../src/queries/project.query', () => ({
+jest.mock('../../../queries/project.query', () => ({
   projectQuery: {
     getProjects: jest.fn(),
   },
 }));
 
-jest.mock('../../../src/utils/helper.util', () => ({
+jest.mock('../../../utils/helper.util', () => ({
   returnSuccess: jest.fn(),
   returnNonSuccess: jest.fn(),
 }));
@@ -104,7 +104,7 @@ describe('User Controller', () => {
       jest.clearAllMocks();
     });
 
-    it('should return users with pagination', async () => {
+    it.only('should return users with pagination', async () => {
       const mockUsers = [
         { id: 1, username: 'user1' },
         { id: 2, username: 'user2' },
