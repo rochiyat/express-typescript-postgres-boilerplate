@@ -37,9 +37,10 @@ npm install
 
 ### Seeding the Database
 
-Seeding with the `seed` script will populate the database with sample data library *static-mock-data-seeder*.
+Seeding with the `seed` script will populate the database with sample data library _static-mock-data-seeder_.
 Can you see in repo https://github.com/rochiyat/postgres-mock-seeder
 Make sure to install it before running the seed script & application connect to the database.
+
 ```bash
 # Create the tables
 npx prisma init

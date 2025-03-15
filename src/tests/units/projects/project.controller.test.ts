@@ -6,14 +6,11 @@ import {
   deleteProject,
   getProjectUsers,
   getProjectAssignments,
-} from '../../../src/controllers/project.controller';
-import { projectQuery } from '../../../src/queries/project.query';
-import {
-  returnSuccess,
-  returnNonSuccess,
-} from '../../../src/utils/helper.util';
+} from '../../../controllers/project.controller';
+import { projectQuery } from '../../../queries/project.query';
+import { returnSuccess, returnNonSuccess } from '../../../utils/helper.util';
 
-jest.mock('../../../src/queries/project.query', () => ({
+jest.mock('../../../queries/project.query', () => ({
   projectQuery: {
     getProjects: jest.fn(),
     getProjectById: jest.fn(),
@@ -25,7 +22,7 @@ jest.mock('../../../src/queries/project.query', () => ({
   },
 }));
 
-jest.mock('../../../src/utils/helper.util', () => ({
+jest.mock('../../../utils/helper.util', () => ({
   returnSuccess: jest.fn(),
   returnNonSuccess: jest.fn(),
 }));
@@ -62,18 +59,11 @@ describe('Project Controller', () => {
 
     it('should handle errors properly', async () => {
       try {
-        (projectQuery.getProjects as jest.Mock).mockRejectedValue(
-          new Error('Database error')
-        );
+        (projectQuery.getProjects as jest.Mock).mockRejectedValue(new Error('Database error'));
 
         await getProjects(req, res);
 
-        expect(returnNonSuccess).toHaveBeenCalledWith(
-          req,
-          res,
-          500,
-          'Internal Server Error'
-        );
+        expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 500, 'Internal Server Error');
       } catch (error) {
         expect(error).toBeDefined();
       }
@@ -116,12 +106,7 @@ describe('Project Controller', () => {
       await getProjectById(req, res);
 
       expect(projectQuery.getProjectById).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        404,
-        'Project not found'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 404, 'Project not found');
     });
 
     it('should handle errors and return 500 response', async () => {
@@ -131,12 +116,7 @@ describe('Project Controller', () => {
       await getProjectById(req, res);
 
       expect(projectQuery.getProjectById).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        500,
-        'Internal Server Error'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 500, 'Internal Server Error');
     });
   });
 
@@ -185,12 +165,7 @@ describe('Project Controller', () => {
       await createProject(req, res);
 
       expect(projectQuery.createProject).toHaveBeenCalledWith(req.body);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        500,
-        'Internal Server Error'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 500, 'Internal Server Error');
     });
   });
 
@@ -230,12 +205,7 @@ describe('Project Controller', () => {
       await updateProject(req, res);
 
       expect(projectQuery.getProjectById).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        404,
-        'Project not found'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 404, 'Project not found');
     });
 
     it('should handle errors and return 500 response', async () => {
@@ -245,12 +215,7 @@ describe('Project Controller', () => {
       await updateProject(req, res);
 
       expect(projectQuery.getProjectById).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        500,
-        'Internal Server Error'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 500, 'Internal Server Error');
     });
   });
 
@@ -291,12 +256,7 @@ describe('Project Controller', () => {
       await deleteProject(req, res);
 
       expect(projectQuery.getProjectById).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        404,
-        'Project not found'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 404, 'Project not found');
     });
 
     it('should handle errors and return 500 response', async () => {
@@ -306,12 +266,7 @@ describe('Project Controller', () => {
       await deleteProject(req, res);
 
       expect(projectQuery.getProjectById).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        500,
-        'Internal Server Error'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 500, 'Internal Server Error');
     });
   });
 
@@ -331,15 +286,11 @@ describe('Project Controller', () => {
 
     it('should return user projects', async () => {
       const mockProjects = [{ id: 1, name: 'Project 1' }];
-      (projectQuery.getProjectAssignments as jest.Mock).mockResolvedValue(
-        mockProjects
-      );
+      (projectQuery.getProjectAssignments as jest.Mock).mockResolvedValue(mockProjects);
 
       await getProjectAssignments(req, res);
 
-      expect(projectQuery.getProjectAssignments).toHaveBeenCalledWith(
-        req.params.id
-      );
+      expect(projectQuery.getProjectAssignments).toHaveBeenCalledWith(req.params.id);
       expect(returnSuccess).toHaveBeenCalledWith(
         req,
         res,
@@ -354,33 +305,17 @@ describe('Project Controller', () => {
 
       await getProjectAssignments(req, res);
 
-      expect(projectQuery.getProjectAssignments).toHaveBeenCalledWith(
-        req.params.id
-      );
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        404,
-        'Project has no assignments'
-      );
+      expect(projectQuery.getProjectAssignments).toHaveBeenCalledWith(req.params.id);
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 404, 'Project has no assignments');
     });
 
     it('should handle errors and return 500 response', async () => {
       const mockError = new Error('Database error');
-      (projectQuery.getProjectAssignments as jest.Mock).mockRejectedValue(
-        mockError
-      );
+      (projectQuery.getProjectAssignments as jest.Mock).mockRejectedValue(mockError);
       await getProjectAssignments(req, res);
 
-      expect(projectQuery.getProjectAssignments).toHaveBeenCalledWith(
-        req.params.id
-      );
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        500,
-        'Internal Server Error'
-      );
+      expect(projectQuery.getProjectAssignments).toHaveBeenCalledWith(req.params.id);
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 500, 'Internal Server Error');
     });
   });
 
@@ -400,9 +335,7 @@ describe('Project Controller', () => {
 
     it('should return project users', async () => {
       const mockProjects = [{ id: 1, name: 'Project 1' }];
-      (projectQuery.getProjectUsers as jest.Mock).mockResolvedValue(
-        mockProjects
-      );
+      (projectQuery.getProjectUsers as jest.Mock).mockResolvedValue(mockProjects);
       (projectQuery.getProjects as jest.Mock).mockResolvedValue(mockProjects);
 
       await getProjectUsers(req, res);
@@ -423,12 +356,7 @@ describe('Project Controller', () => {
       await getProjectUsers(req, res);
 
       expect(projectQuery.getProjectUsers).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        404,
-        'Project has no users'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 404, 'Project has no users');
     });
 
     it('should handle errors and return 500 response', async () => {
@@ -437,12 +365,7 @@ describe('Project Controller', () => {
       await getProjectUsers(req, res);
 
       expect(projectQuery.getProjectUsers).toHaveBeenCalledWith(req.params.id);
-      expect(returnNonSuccess).toHaveBeenCalledWith(
-        req,
-        res,
-        500,
-        'Internal Server Error'
-      );
+      expect(returnNonSuccess).toHaveBeenCalledWith(req, res, 500, 'Internal Server Error');
     });
   });
 });

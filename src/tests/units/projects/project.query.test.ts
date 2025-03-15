@@ -1,5 +1,5 @@
-import { projectQuery } from '../../../src/queries/project.query';
-import prisma from '../../../prisma/client';
+import { projectQuery } from '../../../queries/project.query';
+import prisma from '../../../database/client';
 
 describe('Project Query', () => {
   describe('getProjects', () => {
@@ -76,9 +76,7 @@ describe('Project Query', () => {
 
     it('should return null if project not created', async () => {
       try {
-        jest
-          .spyOn(prisma.project, 'create')
-          .mockRejectedValue(new Error('Project not created'));
+        jest.spyOn(prisma.project, 'create').mockRejectedValue(new Error('Project not created'));
 
         await projectQuery.createProject({
           id: 1,
@@ -124,9 +122,7 @@ describe('Project Query', () => {
 
     it('should return null if project not found', async () => {
       try {
-        jest
-          .spyOn(prisma.project, 'delete')
-          .mockRejectedValue(new Error('Project not found'));
+        jest.spyOn(prisma.project, 'delete').mockRejectedValue(new Error('Project not found'));
 
         await projectQuery.deleteProject(999);
       } catch (error) {

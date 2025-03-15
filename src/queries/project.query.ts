@@ -1,5 +1,5 @@
 import { isEmpty } from 'lodash';
-import prisma from '../../prisma/client';
+import prisma from '../database/client';
 import { Project } from '../models/project.model';
 
 export class ProjectQuery {
@@ -59,9 +59,8 @@ export class ProjectQuery {
       const users = await prisma.user.findMany({
         where: {
           id: {
-            in: assignments.map(
-              (assignment: { id: number; projectId: number; userId: number }) =>
-                Number(assignment.userId)
+            in: assignments.map((assignment: { id: number; projectId: number; userId: number }) =>
+              Number(assignment.userId)
             ),
           },
         },

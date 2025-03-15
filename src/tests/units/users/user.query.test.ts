@@ -1,7 +1,7 @@
 // tests for user query
 import moment from 'moment';
-import { userQuery } from '../../../src/queries/user.query';
-import prisma from '../../../prisma/client';
+import { userQuery } from '../../../queries/user.query';
+import prisma from '../../../database/client';
 
 describe('userQuery', () => {
   describe('getUserById', () => {
@@ -82,9 +82,7 @@ describe('userQuery', () => {
 
     it('should return null if user not found', async () => {
       try {
-        jest
-          .spyOn(prisma.user, 'delete')
-          .mockRejectedValue(new Error('User not found'));
+        jest.spyOn(prisma.user, 'delete').mockRejectedValue(new Error('User not found'));
         await userQuery.deleteUser(999);
       } catch (error) {
         expect(error).toBeDefined();
